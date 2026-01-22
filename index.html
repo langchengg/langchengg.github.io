@@ -3,124 +3,301 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lang Cheng — CPD Portfolio</title>
+
+  <title>Lang Cheng — Robotics & Multimodal Perception Portfolio</title>
+  <meta name="description" content="Lang Cheng — MSc Robotics (University of Manchester). Interests: multimodal embodied perception, robust vision in unknown environments, reproducible evaluation, perception-to-action robotics." />
+  <meta name="keywords" content="Lang Cheng, robotics, computer vision, multimodal perception, embodied AI, LLM reasoning, reproducible research, University of Manchester" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lang Cheng — Robotics & Multimodal Perception" />
+  <meta property="og:description" content="MSc Robotics (UoM). Projects in robust vision evaluation, perception-to-action robotics, and text/data pipelines. PhD interests: multimodal embodied perception & reasoning in unknown environments." />
+  <meta property="og:type" content="website" />
+  <!-- TODO: set og:image to an absolute URL you control -->
+  <!-- <meta property="og:image" content="https://yourdomain.com/og.png" /> -->
+
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
   <style>
     :root{
-      --bg:#fbfcfe; --card:#ffffff; --muted:#6b7280; --accent:#0078d4; --radius:14px;
+      --bg:#fbfcfe;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --accent:#0078d4;
+      --radius:14px;
       --chip-bg:#eef6ff;
+      --border:#e6eef8;
+      --shadow:0 6px 18px rgba(16,24,40,0.05);
+      --shadow2:0 10px 22px rgba(16,24,40,0.06);
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      margin:0; font-family:"Inter",system-ui,Arial,sans-serif; color:#111827; background:var(--bg);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      margin:0;
+      font-family:system-ui,-apple-system,"Inter",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
     }
+    a{color:inherit}
+    .skip-link{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem;
+      background:#fff; border:1px solid var(--border); border-radius:10px; z-index:9999;
+    }
+
     header{
       display:flex; align-items:center; justify-content:space-between; gap:1rem;
-      padding:1.25rem 6%; background:linear-gradient(90deg,#ffffff, #f7fbff);
-      border-bottom:1px solid #e6eef8; position:sticky; top:0; z-index:20;
+      padding:1.1rem 6%;
+      background:linear-gradient(90deg,#ffffff, #f7fbff);
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(180%) blur(6px);
     }
-    .brand {display:flex; align-items:center; gap:0.9rem}
-    .brand h1{font-size:1.15rem; margin:0; letter-spacing:0.2px}
-    nav a{color:var(--muted); text-decoration:none; margin-left:1rem; font-size:0.95rem}
-    nav a:hover{color:var(--accent)}
-    .icons a {margin-left:0.75rem; color:var(--muted); text-decoration:none; font-size:1.25rem}
-    .icons a:hover {color:var(--accent)}
-    main{max-width:1100px; margin:2rem auto; padding:0 2rem;}
+    .brand{display:flex; align-items:center; gap:.9rem}
+    .brand h1{font-size:1.1rem; margin:0; letter-spacing:.2px}
+    .subtitle{font-size:.82rem; color:var(--muted); margin-top:.1rem}
+
+    nav a{
+      color:var(--muted); text-decoration:none; margin-left:1rem; font-size:.95rem;
+      padding:.35rem .45rem; border-radius:10px;
+    }
+    nav a:hover{color:var(--accent); background:#f2f7ff}
+    .icons a{
+      margin-left:.7rem; color:var(--muted); text-decoration:none; font-size:1.25rem;
+    }
+    .icons a:hover{color:var(--accent)}
+
+    main{max-width:1100px; margin:1.8rem auto; padding:0 2rem;}
+
     .hero{
-      display:grid; grid-template-columns: 140px 1fr; gap:1.2rem; align-items:center;
-      background:var(--card); border-radius:var(--radius); padding:1.1rem; box-shadow:0 6px 18px rgba(16,24,40,0.04);
+      display:grid;
+      grid-template-columns:140px 1fr;
+      gap:1.2rem;
+      align-items:center;
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:1.15rem;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(230,238,248,.7);
     }
     .avatar{
-      width:140px; height:140px; border-radius:50%; overflow:hidden; border:4px solid var(--accent);
-      display:flex;align-items:center;justify-content:center;background:#f3f8ff;
+      width:140px; height:140px; border-radius:50%;
+      overflow:hidden;
+      border:4px solid var(--accent);
+      background:#f3f8ff;
+      display:flex; align-items:center; justify-content:center;
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .bio {padding-right:0.5rem}
-    .bio p{margin:0 0 0.6rem; font-size:0.98rem; color:#111827}
-    .bio .muted {color:var(--muted); font-size:0.9rem}
-    .chips {display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.6rem}
-    .chip {background:var(--chip-bg); padding:0.35rem 0.6rem; border-radius:999px; font-size:0.85rem; color:#0f172a}
+    .hero-top{display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    .hero-name{display:flex; flex-direction:column}
+    .hero-name strong{font-size:1.05rem}
+    .hero-cta{display:flex; gap:.6rem; flex-wrap:wrap}
 
-    section {margin-top:1.8rem}
-    h2{font-size:1.05rem;margin:0 0 0.6rem;padding-left:0.6rem;border-left:4px solid var(--accent)}
-    .grid {display:grid; gap:1rem}
-    .skills {display:flex; gap:0.5rem; flex-wrap:wrap}
+    .bio p{margin:.55rem 0 0; font-size:.98rem}
+    .muted{color:var(--muted); font-size:.92rem}
+
+    section{margin-top:1.6rem}
+    h2{
+      font-size:1.04rem; margin:0 0 .65rem;
+      padding-left:.6rem; border-left:4px solid var(--accent);
+    }
+    h3{margin:.2rem 0; font-size:1rem}
+
+    .grid{display:grid; gap:1rem}
     .card{
-      background:var(--card); border-radius:12px; padding:1rem; box-shadow:0 6px 16px rgba(15,23,42,0.04);
+      background:var(--card);
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(230,238,248,.7);
     }
 
-    .projects {grid-template-columns: repeat(auto-fit,minmax(260px,1fr));}
-    .project-card {padding:0.9rem; border-radius:12px; display:flex; flex-direction:column; gap:0.5rem}
-    .project-card h3{margin:0; font-size:1rem}
-    .project-card p{margin:0;color:var(--muted); font-size:0.9rem}
-    .project-links {margin-top:auto; display:flex; gap:0.5rem; align-items:center}
-    .btn {padding:0.45rem 0.7rem; border-radius:8px; text-decoration:none; font-size:0.9rem}
-    .btn-outline {border:1px solid #e6eef8; color:var(--accent); background:transparent}
-    .btn-primary {background:var(--accent); color:white; border:none}
+    .chips{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.65rem}
+    .chip{
+      background:var(--chip-bg);
+      padding:.35rem .6rem;
+      border-radius:999px;
+      font-size:.85rem;
+      color:#0f172a;
+      border:1px solid rgba(0,120,212,.10);
+    }
 
-    .media {display:grid; gap:0.8rem}
-    .video-card iframe, .video-card video{width:100%; border-radius:10px; height:240px; background:#000}
-    footer{max-width:1100px;margin:2rem auto;color:var(--muted); font-size:0.9rem;padding:0 2rem}
-    .credits{font-size:0.82rem; color:#475569; margin-top:0.6rem}
-    @media (max-width:700px){
-      .hero{grid-template-columns: 1fr; text-align:left}
+    .btn{
+      padding:.5rem .75rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.92rem;
+      display:inline-flex; gap:.45rem; align-items:center;
+      border:1px solid var(--border);
+    }
+    .btn:hover{box-shadow:var(--shadow2)}
+    .btn-primary{background:var(--accent); color:white; border-color:transparent}
+    .btn-outline{color:var(--accent); background:transparent}
+
+    .two-col{grid-template-columns:1fr 1fr}
+    .projects{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+    .project-card{display:flex; flex-direction:column; gap:.55rem}
+    .project-meta{display:flex; gap:.45rem; flex-wrap:wrap; margin-top:.1rem}
+    .project-card p{margin:0; color:var(--muted); font-size:.92rem}
+    .project-links{margin-top:auto; display:flex; gap:.55rem; flex-wrap:wrap}
+
+    ul.clean{margin:.25rem 0 0 1.1rem; padding:0}
+    ul.clean li{margin:.3rem 0; color:var(--muted); font-size:.93rem}
+
+    .kpi{
+      display:grid; gap:.6rem;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      margin-top:.7rem;
+    }
+    .kpi .tile{
+      background:#f7fbff;
+      border:1px solid rgba(0,120,212,.12);
+      border-radius:12px;
+      padding:.7rem .8rem;
+    }
+    .kpi .tile strong{display:block; font-size:.98rem}
+    .kpi .tile span{color:var(--muted); font-size:.9rem}
+
+    .video-card iframe{width:100%; border-radius:12px; height:260px; background:#000; border:0}
+
+    footer{
+      max-width:1100px;
+      margin:2rem auto;
+      color:var(--muted);
+      font-size:.9rem;
+      padding:0 2rem 2rem;
+    }
+    .credits{font-size:.82rem; color:#475569; margin-top:.6rem}
+
+    @media (max-width:760px){
+      .hero{grid-template-columns:1fr}
       .avatar{margin:auto}
       nav{display:none}
+      main{padding:0 1.1rem}
     }
   </style>
+
+  <!-- Optional JSON-LD (helps SEO a bit) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lang Cheng",
+    "jobTitle": "MSc Robotics Student",
+    "affiliation": "The University of Manchester",
+    "email": "mailto:lang.cheng@student.manchester.ac.uk",
+    "url": "https://langchengg.github.io",
+    "sameAs": [
+      "https://www.linkedin.com/in/langchengg",
+      "https://github.com/langchengg"
+    ]
+  }
+  </script>
 </head>
+
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
   <header>
     <div class="brand">
-      
       <div>
         <h1>Lang Cheng</h1>
-        <div style="font-size:0.82rem;color:var(--muted)">Robotics · Computer Vision · Machine Learning</div>
+        <div class="subtitle">MSc Robotics (UoM) · Multimodal Perception · Reproducible Evaluation</div>
       </div>
     </div>
 
     <nav aria-label="Main navigation">
       <a href="#about">About</a>
+      <a href="#fit">Research Fit</a>
       <a href="#skills">Skills</a>
-      <a href="#objectives">Objectives</a>
       <a href="#projects">Projects</a>
-      <a href="#cpd">CPD</a>
+      <a href="#experience">Experience</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
     </nav>
 
-    <div class="icons">
-      <!-- Replace URLs with your real profiles -->
+    <div class="icons" aria-label="Profile links">
       <a href="https://www.linkedin.com/in/langchengg" target="_blank" rel="noopener" title="LinkedIn"><i class="ri-linkedin-fill"></i></a>
       <a href="https://github.com/langchengg" target="_blank" rel="noopener" title="GitHub"><i class="ri-github-fill"></i></a>
-      <a href="https://langchengg.github.io/Lang Cheng_resume (1).pdf" target="_blank" rel="noopener" title="Download CV"><i class="ri-file-text-line"></i></a>
+      <!-- TODO: rename your PDF to avoid spaces, e.g. LangCheng_CV.pdf -->
+      <a href="https://langchengg.github.io/LangCheng_CV.pdf" target="_blank" rel="noopener" title="Download CV"><i class="ri-file-text-line"></i></a>
     </div>
   </header>
 
-  <main>
-    <!-- HERO / About -->
+  <main id="content">
+    <!-- HERO / ABOUT -->
     <section id="about" class="hero" aria-labelledby="about-heading">
-      
-      <div class="avatar" aria-hidden>
-  <!-- AVATAR_URL: replace with your real photo or GitHub avatar -->
-  <img src="https://langchengg.github.io/avatar.jpeg" alt="Lang Cheng Avatar" />
-       </div>
+      <div class="avatar">
+        <img src="https://langchengg.github.io/avatar.jpeg" alt="Portrait of Lang Cheng" />
+      </div>
 
-      
       <div class="bio">
-        <h2 id="about-heading" style="border-left:none;padding-left:0">Short bio</h2>
-        <p>
-          I am a Robotics postgraduate at the University of Manchester, building on a B.Eng. in Computer Science from the Beijing Institute of Technology, Zhuhai, driven by a passion for integrating algorithmic intelligence with real-world systems. My academic research and hands-on projects have honed my expertise in computer vision and machine learning, which I apply to a diverse toolkit of modern software and hardware technologies to solve complex challenges.
-        </p>
-        <div class="muted"></div>
-        <div class="chips" aria-hidden>
-          <!-- Short skills preview -->
-          <span class="chip">Python</span>
-          <span class="chip">PyTorch</span>
-          <span class="chip">ROS2</span>
-          <span class="chip">OpenCV</span>
-          <span class="chip">C++</span>
-          <span class="chip">Robotics</span>
+        <div class="hero-top">
+          <div class="hero-name">
+            <strong id="about-heading">Short bio</strong>
+            <span class="muted">Manchester, UK · lang.cheng@student.manchester.ac.uk</span>
+          </div>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="mailto:lang.cheng@student.manchester.ac.uk"><i class="ri-mail-line"></i>Email</a>
+            <a class="btn btn-outline" href="https://langchengg.github.io/LangCheng_CV.pdf" target="_blank" rel="noopener"><i class="ri-file-text-line"></i>CV (PDF)</a>
+            <a class="btn btn-outline" href="https://github.com/langchengg" target="_blank" rel="noopener"><i class="ri-github-fill"></i>GitHub</a>
+          </div>
         </div>
+
+        <p>
+          I’m an MSc Robotics student at The University of Manchester with a BEng in Computer Science (BIT Zhuhai).
+          I build and evaluate perception pipelines (vision + text/log data) and integrate perception with task logic for robotics.
+          I care about <b>robustness in unknown environments</b>, <b>reproducible experiments</b>, and <b>clear failure-mode analysis</b>.
+        </p>
+
+        <div class="chips" aria-label="Highlights">
+          <span class="chip">Robust vision evaluation</span>
+          <span class="chip">Perception-to-action robotics</span>
+          <span class="chip">PyTorch</span>
+          <span class="chip">Python data pipelines</span>
+          <span class="chip">Reproducible experimentation</span>
+          <span class="chip">Failure-case analysis</span>
+        </div>
+
+        <div class="kpi" aria-label="Quick facts">
+          <div class="tile"><strong>Focus</strong><span>Multimodal embodied perception & reasoning</span></div>
+          <div class="tile"><strong>Strength</strong><span>Evaluation under shift (viewpoint/lighting/occlusion)</span></div>
+          <div class="tile"><strong>Style</strong><span>Config-driven runs · Git · clear reports</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH FIT -->
+    <section id="fit" aria-labelledby="fit-heading">
+      <h2 id="fit-heading">Research fit</h2>
+      <div class="grid two-col">
+        <div class="card">
+          <h3>PhD interests</h3>
+          <ul class="clean">
+            <li><b>Multimodal sensory integration</b>: aligning vision with structured signals (e.g., range/LiDAR) and logs/text for reliable scene understanding.</li>
+            <li><b>Efficient multimodal architectures</b>: practical models that can run in real-time robotics loops.</li>
+            <li><b>Embodied reasoning & planning</b>: interfaces between perception outputs and action policies / task logic.</li>
+            <li><b>Unknown environments</b>: evaluation, failure modes, and robustness (distribution shift, occlusion, lighting changes).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What I bring</h3>
+          <ul class="clean">
+            <li>Built and compared classical vs deep vision pipelines with controlled experiments (hyperparameter sweeps, metrics, confusion matrices).</li>
+            <li>Delivered perception-to-action project work (YOLOv8 + task logic) with real-world robustness checks.</li>
+            <li>Strong in data engineering foundations: parsing/normalizing logs & text, schema standardization, and traceable workflows.</li>
+            <li>Comfortable writing clear, reproducible documentation: runbooks, structured results, and decision-focused summaries.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="credits">
+        If you truly have ROS2 / SLAM / Docker experience, add it back with 1–2 concrete examples (project + what you implemented).
+        Otherwise, it’s better to keep the site strictly consistent with your CV.
       </div>
     </section>
 
@@ -128,125 +305,164 @@
     <section id="skills" aria-labelledby="skills-heading">
       <h2 id="skills-heading">Skills</h2>
       <div class="card">
-        <div class="skills" role="list">
-          <div class="chip" role="listitem">Computer Vision (YOLO, pose estimation)</div>
-          <div class="chip" role="listitem">Deep Learning (CNNs, transfer learning)</div>
-          <div class="chip" role="listitem">Robotics (ROS2, Gazebo, RViz)</div>
-          <div class="chip" role="listitem">Perception & SLAM</div>
-          <div class="chip" role="listitem">Software Engineering (Git, Docker)</div>
-          <div class="chip" role="listitem">Data Analysis & Visualization</div>
+        <div class="chips" role="list" aria-label="Skill tags">
+          <span class="chip" role="listitem">Python (pandas, NumPy)</span>
+          <span class="chip" role="listitem">PyTorch (training/eval loops)</span>
+          <span class="chip" role="listitem">Computer Vision (SIFT, BoW, SVM, KNN)</span>
+          <span class="chip" role="listitem">Object Detection (YOLOv8)</span>
+          <span class="chip" role="listitem">Experiment design & metrics</span>
+          <span class="chip" role="listitem">Reproducibility (Git, config-driven runs)</span>
+          <span class="chip" role="listitem">Text mining (LSA topic modelling)</span>
+          <span class="chip" role="listitem">C++ (basic)</span>
+          <span class="chip" role="listitem">MATLAB</span>
         </div>
-      </div>
-    </section>
-
-    <!-- OBJECTIVES / RESEARCH -->
-    <section id="objectives" aria-labelledby="obj-heading">
-      <h2 id="obj-heading">Career objectives & research interests</h2>
-      <div class="card">
-        <ul style="margin:0 0 0.6rem 1.2rem; color:var(--muted)">
-          <li>Develop robust visual perception systems for collaborative robots and assistive platforms.</li>
-          <li>Apply domain adaptation & sim-to-real techniques to transfer models to real hardware.</li>
-          <li>Contribute to open-source robotics tools and publish reproducible research.</li>
-        </ul>
-   
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Personal Projects</h2>
+      <h2 id="projects-heading">Selected projects</h2>
       <div class="grid projects">
-        <!-- Project 1 -Cognitive Robotics and Computer Vision-->
-        <article class="card project-card">
-          <h3>Cognitive Robotics and Computer Vision project</h3>
-          <p>CNN uses resnet18. Traditional CV use SIFT+BoW+SVM， dataset use icubworld</p>
-          <div class="project-links">
-            <a class="btn btn-outline" href="https://github.com/langchengg/Cognitive-Robotics-and-Computer-Vision" target="_blank" rel="noopener">Repo</a>
-            <a class="btn btn-outline" href="https://github.com/langchengg/Cognitive-Robotics-and-Computer-Vision" target="_blank" rel="noopener">Report</a>
-          </div>
-        </article>    
 
-        <!-- Project 2 - Replaced with Undergraduate Thesis -->
         <article class="card project-card">
-          <h3>Reddit Topic Modeling & Social Network Analysis</h3>
-          <p>Undergraduate Thesis: LSA topic modelling + SNA on large Reddit comment corpora; produced topic summaries and network centrality visualisations.</p>
+          <h3>Robust Robot Vision Evaluation: ResNet-18 vs SIFT–BoW–SVM (iCubWorld)</h3>
+          <div class="project-meta">
+            <span class="chip">Computer Vision</span>
+            <span class="chip">Reproducible Experiments</span>
+            <span class="chip">Failure Analysis</span>
+          </div>
+          <p>
+            Built two end-to-end recognition pipelines and evaluated robustness under viewpoint & illumination changes.
+            Produced comparable metrics and documented trade-offs for engineering decisions.
+          </p>
+          <ul class="clean">
+            <li>Controlled sweeps: BoW vocab size, SVM C, KNN k, CNN lr/weight decay/batch size.</li>
+            <li>Reported confusion matrix and failure modes (shift sensitivity, class confusions).</li>
+            <li>Outcome: ResNet-18 ~98–99% vs classical pipeline ~56% (best run).</li>
+          </ul>
           <div class="project-links">
-            <a class="btn btn-outline" href="https://github.com/langchengg/Comparing-ResNet-18-and-SIFT-BoW-SVM-for-Robot-Vision-on-iCubWorld" target="_blank" rel="noopener">Repo</a>
-            <a class="btn btn-outline" href="https://github.com/langchengg/Comparing-ResNet-18-and-SIFT-BoW-SVM-for-Robot-Vision-on-iCubWorld/blob/main/LangCheng_report.pdf" target="_blank" rel="noopener">Thesis</a>
+            <a class="btn btn-outline" href="https://github.com/langchengg/Cognitive-Robotics-and-Computer-Vision" target="_blank" rel="noopener">
+              <i class="ri-github-fill"></i>Repo
+            </a>
+            <!-- TODO: replace with direct PDF link if you have a report -->
+            <a class="btn btn-outline" href="https://github.com/langchengg/Cognitive-Robotics-and-Computer-Vision" target="_blank" rel="noopener">
+              <i class="ri-file-text-line"></i>Report
+            </a>
           </div>
         </article>
 
-      
+        <article class="card project-card">
+          <h3>Embodied Perception-to-Action: Autonomous Object Retrieval (YOLOv8 + Task Logic)</h3>
+          <div class="project-meta">
+            <span class="chip">Robotics</span>
+            <span class="chip">Real-time perception</span>
+            <span class="chip">Robustness checks</span>
+          </div>
+          <p>
+            Integrated detection with task logic for a mobile robot: detect targets, navigate for pickup, and sort objects.
+            Focused on practical reliability in messy conditions.
+          </p>
+          <ul class="clean">
+            <li>Handled missed detections, occlusion, and lighting variation with safe fallbacks.</li>
+            <li>Iterative testing with structured run notes to accelerate debugging.</li>
+          </ul>
+          <div class="project-links">
+            <!-- TODO: add repo link if you can share -->
+            <a class="btn btn-outline" href="#contact">
+              <i class="ri-mail-line"></i>Request details
+            </a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <h3>Large-Scale Text Pipeline: Topic Modelling + Social Network Analysis (Undergrad Thesis)</h3>
+          <div class="project-meta">
+            <span class="chip">NLP / Text Mining</span>
+            <span class="chip">Data pipelines</span>
+            <span class="chip">Graph analysis</span>
+          </div>
+          <p>
+            Built an end-to-end Python pipeline for large Reddit corpora: preprocessing, LSA topic modelling, interpretation,
+            and reporting-ready outputs; plus SNA with centrality measures and visual summaries.
+          </p>
+          <ul class="clean">
+            <li>Emphasis on reproducible structure: clear folders, rerunnable scripts, documented results.</li>
+          </ul>
+          <div class="project-links">
+            <!-- Your current links looked mismatched; keep only what truly points to this project -->
+            <a class="btn btn-outline" href="https://github.com/langchengg" target="_blank" rel="noopener">
+              <i class="ri-github-fill"></i>GitHub
+            </a>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- VIDEOS / MEDIA -->
-    <section id="videos" aria-labelledby="videos-heading">
-      <h2 id="videos-heading">Project Videos</h2>
-      <div class="grid media">
-       
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="exp-heading">
+      <h2 id="exp-heading">Experience</h2>
+      <div class="card">
+        <h3>Zhuhai Hengqin Boyi Data Technology Co., Ltd — AI Product Intern</h3>
+        <div class="muted">Mar 2025 – Jul 2025 · Zhuhai, China</div>
+        <ul class="clean">
+          <li>Built Python (pandas/NumPy) workflows to parse, clean, and normalize structured data plus text/usage logs; standardized schemas for repeatable analysis.</li>
+          <li>Translated stakeholder requirements into concrete data collection, processing, and evaluation steps; documented decisions for auditability and handoff.</li>
+          <li>Supported prompt iteration with lightweight evaluation and change tracking (versioned prompts, comparable outputs, concise summaries).</li>
+          <li>Synthesized user feedback and usage metrics into actionable notes that informed prioritization.</li>
+        </ul>
+      </div>
+    </section>
 
+    <!-- MEDIA -->
+    <section id="media" aria-labelledby="media-heading">
+      <h2 id="media-heading">Media</h2>
+      <div class="grid">
         <div class="card video-card">
           <h3>Robotic Systems for Sustainable Development</h3>
-          <p style="margin:0 0 0.5rem;color:var(--muted)">Short: Coursework project demonstrating robotics applications for environmental sustainability and resource optimization.</p>
-          <!-- Replaced with your YouTube video -->
-          <iframe src="https://www.youtube.com/embed/TF1cXHXQgaM" title="Robotic Systems for Sustainable Development demo" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="credits">Video: Robotic Systems for Sustainable Development coursework project - University of Manchester.</div>
-         
-        </div>
-          <div class="card video-card">
-          <h3>Robotic Systems for Communication of Research</h3>
-          <p style="margin:0 0 0.5rem;color:var(--muted)">Short: Communication of Research</p>
-          <!-- Replaced with your YouTube video -->
-          <iframe src="https://www.youtube.com/embed/TF1cXHXQgaM" title="Robotic Systems for 2D lidar" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="credits">Video: Robotic Systems for Sustainable Development coursework project - University of Manchester.</div>
-         
+          <p class="muted" style="margin:.15rem 0 .6rem">
+            Coursework demo — sustainability / resource optimisation scenario.
+          </p>
+          <iframe
+            src="https://www.youtube.com/embed/TF1cXHXQgaM"
+            title="Robotic Systems for Sustainable Development demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+          <div class="credits">Replace this video if the second “Communication of Research” is different (right now both embeds are identical).</div>
         </div>
       </div>
     </section>
 
-   <!-- CPD Records -->
-    <section id="cpd" aria-labelledby="cpd-heading">
-      <h2 id="cpd-heading">CPD records</h2>
-      <div class="card">
-        <div style="display:flex; gap:1rem; flex-direction:column">
-          <div>
-            <strong>Zhuhai Hengqin Boyi Data Technology Co., Ltd — AI Product Intern</strong><br>
-            <em>Mar 2025 - Jun 2025 · Zhuhai, China</em>
-            <ul style="margin:0.5rem 0 0 1.2rem; color:var(--muted); font-size:0.9rem">
-              <li>Cleaned and processed structured and unstructured data using Python (pandas); built pipelines for text and usage logs.</li>
-              <li>Assisted product team with requirement analysis, feature design and end-to-end implementation from collection to deployment.</li>
-              <li>Applied prompt engineering and iterated generative product prompts to improve response quality and UX.</li>
-              <li>Collected user feedback and usage metrics; performed basic analyses and recommended optimisations.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT / LINKS -->
+    <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Links & contact</h2>
-      <div class="card" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;">
-        <div style="display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap;">
-          <a class="btn btn-outline" href="https://github.com/langchengg" target="_blank" rel="noopener"><i class="ri-github-fill"></i> GitHub</a>
-          <a class="btn btn-outline" href="https://www.linkedin.com/in/langchengg" target="_blank" rel="noopener"><i class="ri-linkedin-fill"></i> LinkedIn</a>
-          <a class="btn btn-outline" href="https://langchengg.github.io/Lang Cheng_resume (1).pdf" target="_blank" rel="noopener"><i class="ri-file-text-line"></i> CV (PDF)</a>
+      <h2 id="contact-heading">Contact</h2>
+      <div class="card" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+        <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;">
+          <a class="btn btn-outline" href="https://github.com/langchengg" target="_blank" rel="noopener"><i class="ri-github-fill"></i>GitHub</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/langchengg" target="_blank" rel="noopener"><i class="ri-linkedin-fill"></i>LinkedIn</a>
+          <a class="btn btn-outline" href="https://langchengg.github.io/LangCheng_CV.pdf" target="_blank" rel="noopener"><i class="ri-file-text-line"></i>CV (PDF)</a>
         </div>
-        <div style="color:var(--muted); font-size:0.92rem">Email: <a href="mailto:your.email@manchester.ac.uk">lang.cheng@student.manchester.ac.uk</a></div>
+        <div class="muted">
+          Email: <a href="mailto:lang.cheng@student.manchester.ac.uk">lang.cheng@student.manchester.ac.uk</a>
+        </div>
       </div>
 
-      <div class="credits" style="margin-top:0.6rem">
-        <strong>Media & copyright notice:</strong> 
-        Designed by HTML
+      <div class="credits">
+        Tip: rename files to avoid spaces (e.g., <code>LangCheng_CV.pdf</code>) so GitHub Pages links don’t break.
       </div>
     </section>
   </main>
 
   <footer>
-    © 2025 Lang Cheng 
+    © 2026 Lang Cheng · Last updated: <span id="lastUpdated"></span>
+    <div class="credits">Minimal static site (HTML/CSS), optimized for fast scanning by PhD reviewers.</div>
   </footer>
+
+  <script>
+    // Small polish: auto-fill "Last updated" using the user's local date
+    const el = document.getElementById("lastUpdated");
+    if (el) el.textContent = new Date().toLocaleDateString(undefined, {year:"numeric", month:"short", day:"2-digit"});
+  </script>
 </body>
 </html>
